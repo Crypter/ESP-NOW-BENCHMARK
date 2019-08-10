@@ -35,7 +35,6 @@ void report( void * parameter ){
 //      Serial.println(link_quality[i]);
     }
     calculated_quality = (float) calculated_quality/(1000/DELAY)*100;
-    Serial.print("Quality: ");
     Serial.println(calculated_quality);
     delay(100);
   }
@@ -137,9 +136,7 @@ TRY_ESP_ACTION( esp_wifi_set_protocol(WIFI_IF_STA, WIFI_PROTOCOL_LR), "WIFI_PROT
 
 void loop() {
 #ifdef SENDER
-//  value = digitalRead(0) ? 0:255;
-//  packet_data[0]=value;
-  esp_now_send(broadcast_addr, packet_data, PACKET_LENGTH);
+  if (digitalRead(0)) esp_now_send(broadcast_addr, packet_data, PACKET_LENGTH);
   delay(DELAY);
 #endif
 
